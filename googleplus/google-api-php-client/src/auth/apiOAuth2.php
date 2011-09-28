@@ -51,7 +51,8 @@ class apiOAuth2 extends apiAuth {
     }
 
     if (! empty($apiConfig['oauth2_redirect_uri'])) {
-      $this->redirectUri = $apiConfig['oauth2_redirect_uri'];
+      //$this->redirectUri = $apiConfig['oauth2_redirect_uri'];
+      $this->redirectUri = 'http://comertial.com/plusone/index.php';
     }
   }
 
