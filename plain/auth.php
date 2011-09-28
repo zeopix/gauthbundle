@@ -35,7 +35,7 @@ try
 	if (empty($_GET["oauth_token"]))
 	{
 		$getAuthTokenParams = array('scope' => 
-			'http://docs.google.com/feeds/',
+			'http://docs.google.com/feeds/', //https://www.googleapis.com/auth/plus.me
 			'xoauth_displayname' => 'Oauth test',
 			'oauth_callback' => 'http://comertial.com/plain/auth.php');
 

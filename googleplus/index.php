@@ -23,10 +23,10 @@ $client = new apiClient();
 $client->setApplicationName("Google+ PHP Starter Application");
 // Visit https://code.google.com/apis/console to generate your
 // oauth2_client_id, oauth2_client_secret, and to register your oauth2_redirect_uri.
-// $client->setClientId('insert_your_oauth2_client_id');
-// $client->setClientSecret('insert_your_oauth2_client_secret');
-// $client->setRedirectUri('insert_your_oauth2_redirect_uri');
-// $client->setDeveloperKey('insert_your_developer_key');
+ $client->setClientId('345503510563.apps.googleusercontent.com');
+ $client->setClientSecret('-2CZEJhe2Kk1nBuv52bkjq3V');
+ $client->setRedirectUri('http://www.comertial.com/googleplus/index.php');
+ $client->setDeveloperKey('AI39si6UVXj7WRM4bHgY8RxcGW8UsWL2muY7oJxOCf2KFJkLE6zdw-U_tyhp3mWRqE4LBkuciwigXqROKhzsD35KWHRy8TF-BA');
 $client->setScopes(array('https://www.googleapis.com/auth/plus.me'));
 $plus = new apiPlusService($client);
 
