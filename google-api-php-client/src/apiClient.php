@@ -124,10 +124,10 @@ class apiClient {
     $this->auth = new $authClassName();
   }
 
-  public function authenticate() {
+  public function authenticate($code) {
     $service = $this->prepareService();
     $this->authenticated = true;
-    return $this->auth->authenticate($service);
+    return $this->auth->authenticate($service,$code);
   }
 
   
