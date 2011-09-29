@@ -60,7 +60,7 @@ class DefaultController extends Controller
                         
             
             $session->set('access_token',$at);
-            $this->redirect($this->generateUrl('home'));
+            return $this->redirect($this->generateUrl('home'));
             
         }
 
