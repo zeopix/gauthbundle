@@ -63,7 +63,6 @@ class apiOAuth2 extends apiAuth {
 
     if (isset($code)) {
         //#debug
-        die("CODE:" . $code);
       // We got here from the redirect from a successful authorization grant, fetch the access token
       $request = $this->io->makeRequest(new apiHttpRequest(self::OAUTH2_TOKEN_URI, 'POST', array(), array(
           'code' => $code,
@@ -73,10 +72,14 @@ class apiOAuth2 extends apiAuth {
           'client_secret' => $this->clientSecret
       )));
       if ((int)$request->getResponseHttpCode() == 200) {
+                   die("GOT 200, CODE:" . $request->getResponseBody());
+
         $this->setAccessToken($request->getResponseBody());
         $this->accessToken['created'] = time();
         return $this->getAccessToken();
       } else {
+                             die("GOT OTHER, CODE:" . $request->getResponseBody());
+
         $response = $request->getResponseBody();
         $decodedResponse = json_decode($response, true);
         if ($decodedResponse != $response && $decodedResponse != null && $decodedResponse['error']) {
