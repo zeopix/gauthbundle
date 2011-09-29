@@ -55,22 +55,16 @@ class DefaultController extends Controller
         $code = $request->get('code');
         
         if(!empty($code)){   
-            $client->authenticate($code);
+            $at = $client->authenticate($code);
+                        
             
-            $at = $client->getAccessToken();
-            
-            ob_start();
-            echo "access_token: ";
-            print_r($at);
-            die(ob_get_clean());
-            
-            $session->set('access_token',$client->getAccessToken());
+            $session->set('access_token',$at);
             $this->redirect($this->generateUrl('home'));
             
         }
 
         $session->set('access_token',false);
-       die("havent code GOT: " . $code);
+       die("havent code GOT: " . $code . " AT:" . $at);
        // return $this->redirect($this->generateUrl('home'));
     
           
