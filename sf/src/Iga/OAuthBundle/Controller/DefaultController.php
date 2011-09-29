@@ -90,7 +90,7 @@ $client->setApplicationName("Google+ PHP Starter Application");
 // oauth2_client_id, oauth2_client_secret, and to register your oauth2_redirect_uri.
  $client->setClientId('345503510563.apps.googleusercontent.com');
  $client->setClientSecret('-2CZEJhe2Kk1nBuv52bkjq3V');
- $client->setRedirectUri('http://www.comertial.com/sf/web/app_dev.php/GoogleAuth');
+ $client->setRedirectUri('http://www.comertial.com/GoogleAuth');
  $client->setDeveloperKey('AI39si6UVXj7WRM4bHgY8RxcGW8UsWL2muY7oJxOCf2KFJkLE6zdw-U_tyhp3mWRqE4LBkuciwigXqROKhzsD35KWHRy8TF-BA');
 $client->setScopes(array('https://www.googleapis.com/auth/plus.me'));
         return $client;
