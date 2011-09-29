@@ -2076,3 +2076,7 @@
 [2011-09-29 17:24:29] event.DEBUG: Notified event "kernel.request" to listener "Symfony\Bundle\FrameworkBundle\EventListener\SessionListener::onKernelRequest". [] []
 [2011-09-29 17:24:29] event.DEBUG: Notified event "kernel.request" to listener "Symfony\Component\Security\Http\Firewall::onKernelRequest". [] []
 [2011-09-29 17:24:29] event.DEBUG: Notified event "kernel.request" to listener "Symfony\Bundle\FrameworkBundle\EventListener\RouterListener::onKernelRequest". [] []
+[2011-09-29 17:36:44] event.DEBUG: Notified event "kernel.request" to listener "Symfony\Bundle\FrameworkBundle\EventListener\RouterListener::onEarlyKernelRequest". [] []
+[2011-09-29 17:36:44] event.DEBUG: Notified event "kernel.request" to listener "Symfony\Bundle\FrameworkBundle\EventListener\SessionListener::onKernelRequest". [] []
+[2011-09-29 17:36:44] event.DEBUG: Notified event "kernel.request" to listener "Symfony\Component\Security\Http\Firewall::onKernelRequest". [] []
+[2011-09-29 17:36:44] event.DEBUG: Notified event "kernel.request" to listener "Symfony\Bundle\FrameworkBundle\EventListener\RouterListener::onKernelRequest". [] []

@@ -67,7 +67,7 @@ class apiOAuth extends apiAuth {
    * @param string $consumerSecret
    * @return apiOAuth3Legged the logged-in provider instance
    */
-  public function authenticate($service) {
+  public function authenticate($service,$code) {
     global $apiConfig;
     $this->service = $service;
     $this->service['authorization_token_url'] .= '?scope=' . apiClientOAuthUtil::urlencodeRFC3986($service['scope']) . '&domain=' . apiClientOAuthUtil::urlencodeRFC3986($apiConfig['site_name']) . '&oauth_token=';

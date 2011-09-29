@@ -56,7 +56,7 @@ class apiOAuth2 extends apiAuth {
     }
   }
 
-  public function authenticate($service) {
+  public function authenticate($service,$code) {
     if ($this->io == null) {
       global $apiClient;
       $this->io = $apiClient->getIo();
