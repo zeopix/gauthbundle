@@ -56,6 +56,13 @@ class DefaultController extends Controller
         
         if(!empty($code)){   
             $client->authenticate($code);
+            
+            $at = $client->getAccessToken();
+            
+            ob_start();
+            print_r($at);
+            die(ob_get_clean());
+            
             $session->set('access_token',$client->getAccessToken());
             $this->redirect($this->generateUrl('home'));
             
