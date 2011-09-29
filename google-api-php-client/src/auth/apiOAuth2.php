@@ -69,7 +69,8 @@ class apiOAuth2 extends apiAuth {
           'grant_type' => 'authorization_code',
           'redirect_uri' => $this->redirectUri,
           'client_id' => $this->clientId,
-          'client_secret' => $this->clientSecret
+          'client_secret' => $this->clientSecret,
+          'grant_type' => 'authorization_code'
       )));
       if ((int)$request->getResponseHttpCode() == 200) {
                    die("GOT 200, CODE:" . $request->getResponseBody());
