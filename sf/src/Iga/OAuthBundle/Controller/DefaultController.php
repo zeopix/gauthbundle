@@ -55,7 +55,9 @@ class DefaultController extends Controller
         $code = $request->get('code');
         
         if(!empty($code)){
-            
+       		ob_start();
+		print_r($code);
+		die(ob_get_clean());    
             $client->authenticate();
             $session->set('access_token',$client->getAccessToken());
             $this->redirect($this->generateUrl('home'));
@@ -63,8 +65,8 @@ class DefaultController extends Controller
         }
 
         $session->set('access_token',false);
-        
-        return $this->redirect($this->generateUrl('home'));
+       die("havent code");
+       // return $this->redirect($this->generateUrl('home'));
     
           
     }
