@@ -60,6 +60,7 @@ class DefaultController extends Controller
             $at = $client->getAccessToken();
             
             ob_start();
+            echo "access_token: ";
             print_r($at);
             die(ob_get_clean());
             
