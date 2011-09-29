@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+use Symfony\Component\HttpFoundation\Response;
 require_once dirname(__FILE__) . '/../../../../../google-api-php-client/src/apiClient.php';
 require_once dirname(__FILE__) . '/../../../../../google-api-php-client/src/contrib/apiPlusService.php';
 
@@ -64,9 +65,9 @@ class DefaultController extends Controller
         }
 
         $session->set('access_token',false);
-       die("havent code GOT: " . $code . " AT:" . $at);
+       //die("havent code GOT: " . $code . " AT:" . $at);
        // return $this->redirect($this->generateUrl('home'));
-    
+    return new Response("end");
           
     }
     
