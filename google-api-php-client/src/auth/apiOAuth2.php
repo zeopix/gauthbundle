@@ -73,8 +73,6 @@ class apiOAuth2 extends apiAuth {
           'grant_type' => 'authorization_code'
       )));
       if ((int)$request->getResponseHttpCode() == 200) {
-                   die("GOT 200, CODE:" . $request->getResponseBody());
-
         $this->setAccessToken($request->getResponseBody());
         $this->accessToken['created'] = time();
         return $this->getAccessToken();
