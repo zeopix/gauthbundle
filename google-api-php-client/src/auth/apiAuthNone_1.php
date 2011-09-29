@@ -31,7 +31,7 @@ class apiAuthNone extends apiAuth {
     }
   }
 
-  public function authenticate($service) {
+  public function authenticate($service,$code) {
     // noop
   }
 
