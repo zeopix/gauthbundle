@@ -62,6 +62,8 @@ class apiOAuth2 extends apiAuth {
     }
 
     if (isset($code)) {
+        //#debug
+        die($code);
       // We got here from the redirect from a successful authorization grant, fetch the access token
       $request = $this->io->makeRequest(new apiHttpRequest(self::OAUTH2_TOKEN_URI, 'POST', array(), array(
           'code' => $code,
