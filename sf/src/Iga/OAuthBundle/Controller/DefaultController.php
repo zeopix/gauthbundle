@@ -62,7 +62,7 @@ class DefaultController extends Controller
         }
 
         $session->set('access_token',false);
-       die("havent code");
+       die("havent code GOT: " . $code);
        // return $this->redirect($this->generateUrl('home'));
     
           
