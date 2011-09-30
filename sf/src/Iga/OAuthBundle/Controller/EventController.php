@@ -37,12 +37,14 @@ class EventController extends Controller
             
         }
         
-        $this->client->setAccessToken($at);
+        $client->setAccessToken($at);
 
-        //$plus = $this->getPlus($this->client);
-        //$me = $plus->people->get('me');
+        $plus = $this->getPlus($client);
+        $me = $plus->people->get('me');
         
-        
+        ob_start();
+        print_r($me);
+        die(ob_get_clean());
         
         $em = $this->getDoctrine()->getEntityManager();
 
