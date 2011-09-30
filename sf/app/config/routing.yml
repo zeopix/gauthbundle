@@ -1,8 +1,13 @@
+GooglePlusBundle:
+    resource: "@GooglePlusBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 IgaOAuthBundle:
     resource: "@IgaOAuthBundle/Controller/"
     type:     annotation
     prefix:   /
-
+    
 # Internal routing configuration to handle ESI
 #_internal:
 #   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"

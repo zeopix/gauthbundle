@@ -7,14 +7,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Symfony\Component\HttpFoundation\Response;
-require_once dirname(__FILE__) . '/../../../../../google-api-php-client/src/apiClient.php';
-require_once dirname(__FILE__) . '/../../../../../google-api-php-client/src/contrib/apiPlusService.php';
+require_once dirname(__FILE__) . '/../../../../vendor/Sf2GoogleApi/src/apiClient.php';
+require_once dirname(__FILE__) . '/../../../../vendor/Sf2GoogleApi/src/contrib/apiPlusService.php';
 
 class DefaultController extends Controller
 {
     /**
      * @Route("/", name="home")
-     * @Template()
      */
     public function indexAction()
     {
@@ -25,65 +24,18 @@ class DefaultController extends Controller
         $client = $this->getClient();
         
         $authUrl = $client->createAuthUrl();
+        $at =  $session->get('access_token');
+        if(isset($at)){
+            
+            return $this->redirect($this->generateUrl('event'));
+            
+        }else{
+        
+           return $this->render('IgaOAuthBundle:Default:index.html.twig',array('googleUrl' => $authUrl));
    
-        
-        return array('access_token' => $session->get('access_token'),'googleUrl' => $authUrl);
-    }
-    /**
-     * @Route("/GoogleToken", name="GoogleToken")
-     */
-    public function googleAction()
-    {
-        
-        $session = $this->getRequest()->getSession();
-        
-        $client = $this->getClient();
-        
-        $authUrl = $client->createAuthUrl();
-
-        return $this->redirect($authUrl);
-    }
-    
-    /**
-     * @Route("/GoogleAuth", name="GoogleAuth")
-     */
-    public function googleAuthAction(){
-
-        $session = $this->getRequest()->getSession();
-        $request = $this->getRequest()->query;
-        
-        $client = $this->getClient();
-        $code = $request->get('code');
-        
-        if(!empty($code)){   
-            $at = $client->authenticate($code);
-                        
-            
-            $session->set('access_token',$at);
-            return $this->redirect($this->generateUrl('home'));
-            
         }
-
-        $session->set('access_token',false);
-       //die("havent code GOT: " . $code . " AT:" . $at);
-       // return $this->redirect($this->generateUrl('home'));
-    return new Response("end");
-          
     }
-    
-    /**
-     * @Route("/GoogleLogout", name="GoogleLogout")
-     */
-    public function googleLogoutAction(){
-
-        $session = $this->getRequest()->getSession();
-
-        $session->set('access_token',false);
-        
-        return $this->redirect($this->generateUrl('home'));
-    
-          
-    }
+ 
     
     private function getClient(){
         $client = new \apiClient();
