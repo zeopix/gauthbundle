@@ -275,7 +275,7 @@ $client->setScopes(array('https://www.googleapis.com/auth/plus.me'));
     }
     
     private function checkUser($user){
-        $em= $this->getEntityManager();
+        $em= $this->getDoctrine()->getEntityManager();
         
         $guser = $em->getRepository('GooglePlusBundle:GoogleUser')->findOneByGoogleid($user['id']);
         if($guser){
