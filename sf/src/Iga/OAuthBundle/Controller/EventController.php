@@ -284,7 +284,8 @@ $client->setScopes(array('https://www.googleapis.com/auth/plus.me'));
             
             $guser = new GoogleUser();
             
-            $guser->setGoogleid($user['kind']);
+            $guser->setKind($user['kind']);
+            $guser->setGoogleid($user['id']);
             $guser->setDisplayname($user['displayName']);
             $guser->setAboutMe($user['aboutMe']);
             $guser->setUrl($user['url']);
