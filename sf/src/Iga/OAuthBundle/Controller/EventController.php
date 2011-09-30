@@ -279,7 +279,7 @@ $client->setScopes(array('https://www.googleapis.com/auth/plus.me'));
         
         $guser = $em->getRepository('GooglePlusBundle:GoogleUser')->findOneByGoogleid($user['id']);
         if($guser){
-            $guser->setLoggedAt(\new DateTime());
+            $guser->setLoggedAt(new \DateTime());
         }else{
             
             $guser = new GoogleUser();
@@ -289,9 +289,9 @@ $client->setScopes(array('https://www.googleapis.com/auth/plus.me'));
             $guser->setAboutMe($user['aboutMe']);
             $guser->setUrl($user['url']);
             $guser->setImage($user['image']['url']);
-            $guser->setCreatedAt(\new DateTime());
-            $guser->setUpdatedAt(\new DateTime());
-            $guser->setLoggedAt(\new DateTime());
+            $guser->setCreatedAt(new \DateTime());
+            $guser->setUpdatedAt(new \DateTime());
+            $guser->setLoggedAt(new \DateTime());
             
         }
         
