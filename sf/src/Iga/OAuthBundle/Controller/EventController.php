@@ -37,7 +37,7 @@ class EventController extends Controller
             
         }
         
-        //$this->client->setAccessToken($at);
+        $this->client->setAccessToken($at);
 
         //$plus = $this->getPlus($this->client);
         //$me = $plus->people->get('me');
