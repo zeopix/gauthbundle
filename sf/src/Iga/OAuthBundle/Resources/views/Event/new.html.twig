@@ -1,0 +1,63 @@
+{% extends 'IgaOAuthBundle::layout.html.twig' %}
+
+{% block main %}
+<h1>Event creation</h1>
+
+<form action="{{ path('event_create') }}" method="post" {{ form_enctype(form) }}>
+
+
+<fieldset>
+          <legend>Datos Básicos</legend>
+          <div class="clearfix">
+            <label for="xlInput">Título del evento</label>
+            <div class="input">
+                {{ form_widget(form.title,{ 'attr' : { 'class' : 'xlarge' , 'size' : '30' }}) }}
+            </div>
+          </div><!-- /clearfix -->
+            <label for="xlInput">Localización</label>
+            <div class="input">
+                {{ form_widget(form.location,{ 'attr' : { 'class' : 'xlarge' , 'size' : '30' }}) }}
+            </div>
+          </div><!-- /clearfix -->
+          
+<div class="clearfix">
+            <label for="xlInput">Inicio del evento</label>
+            <div class="input">
+              {{ form_widget(form.start) }}
+            </div>
+          </div><!-- /clearfix -->
+            <label for="xlInput">Fin del evento:</label>
+            <div class="input">
+              {{ form_widget(form.end) }}
+            </div>
+          </div><!-- /clearfix -->
+          
+        </fieldset>
+
+
+<fieldset>
+          <legend>Información Adicional</legend>
+          <div class="clearfix">
+            <label for="xlInput">Información</label>
+            <div class="input">
+              {{ form_widget(form.info, { 'attr' : { 'class' : 'xxlarge' }}) }}
+            </div>
+          </div><!-- /clearfix -->
+          
+        </fieldset>
+
+
+    {{ form_rest(form) }}
+    <p>
+        <button type="submit">Create</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('event') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

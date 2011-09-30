@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="google_plus.auth" class="Google\PlusBundle\Security\Authentication\Provider\GoogleProvider" public="false">
+            <argument type="service" id="service_container"/>
+        </service>
+
+        <service id="google_plus.security.authentication.listener"
+                 class="Google\PlusBundle\Security\Firewall\GoogleListener"
+                 parent="security.authentication.listener.abstract"
+                 abstract="true">
+        </service>
+
+        <service id="google_plus.security.authentication.entry_point" class="Google\PlusBundle\Security\EntryPoint\GoogleAuthenticationEntryPoint" public="false" abstract="true">
+            <argument type="collection"></argument>
+        </service>
+
+    </services>
+</container>

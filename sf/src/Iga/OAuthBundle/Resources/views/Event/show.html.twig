@@ -1,0 +1,50 @@
+{% extends 'IgaOAuthBundle::sidelayout.html.twig' %}
+{% block main %}
+<h1>Event</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th colspan="2">Título</th>
+            <td colspan="2">{{ entity.title }}</td>
+        </tr>
+        <tr>
+            <th colspan="2">Ubicación</th>
+            <td colspan="2">{{ entity.location }}</td>
+        </tr>
+        <tr>
+            <th>Empieza</th>
+            <td>{{ entity.start|date('Y-m-d H:i:s') }}</td>
+            <th>Finaliza</th>
+            <td>{{ entity.end|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th colspan="4">Info</th>
+        </tr>
+        <tr>
+            <td colspan="4">{{ entity.info }}</td>
+        </tr>
+        <tr>
+            <th colspan="4">Fotos</th>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <img src="" height="100px" width="100px">
+                <a class="btn primary" href="#">Añadir foto</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+        <a class="btn primary" href="{{ path('event') }}">
+            Volver atras
+        </a>
+   
+
+{% endblock %}
+{% block sidebar %}
+<h2>Organizador</h2>
+<p>Lorem impsut</p><br>
+<h3>104<span> asistentes</span></h3>
+<h3>236<span> invitados</span></h3>
+
+{% endblock %}
