@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Iga\OAuthBundle\Entity\Event;
+use Google\PlusBundle\Entity\GoogleUser;
 use Iga\OAuthBundle\Form\EventType;
 
 require_once dirname(__FILE__) . '/../../../../vendor/Sf2GoogleApi/src/apiClient.php';
@@ -37,14 +38,14 @@ class EventController extends Controller
             
         }
         
+        
         $client->setAccessToken($at);
 
         $plus = $this->getPlus($client);
         $me = $plus->people->get('me');
         
-        ob_start();
-        print_r($me);
-        die(ob_get_clean());
+        $user = $this->checkUser($me);
+       
         
         $em = $this->getDoctrine()->getEntityManager();
 
@@ -56,7 +57,7 @@ class EventController extends Controller
         
         
         
-        return array('entities' => $entities);
+        return array('entities' => $entities, 'user' => $user);
     }
 
     /**
@@ -271,5 +272,33 @@ $client->setScopes(array('https://www.googleapis.com/auth/plus.me'));
     private function getPlus($client){
         
         return new \apiPlusService($client);
+    }
+    
+    private function checkUser($user){
+        $em= $this->getEntityManager();
+        
+        $guser = $em->getRepository('GooglePlusBundle:GoogleUser')->findOneByGoogleid($user['id']);
+        if($guser){
+            $guser->setLoggedAt(\new DateTime());
+        }else{
+            
+            $guser = new GoogleUser();
+            
+            $guser->setGoogleid($user['kind']);
+            $guser->setDisplayname($user['displayName']);
+            $guser->setAboutMe($user['aboutMe']);
+            $guser->setUrl($user['url']);
+            $guser->setImage($user['image']['url']);
+            $guser->setCreatedAt(\new DateTime());
+            $guser->setUpdatedAt(\new DateTime());
+            $guser->setLoggedAt(\new DateTime());
+            
+        }
+        
+            $em->persist($guser);
+            $em->flush();
+            
+            return $guser;
+            
     }
 }
