@@ -289,6 +289,7 @@ $client->setScopes(array('https://www.googleapis.com/auth/plus.me'));
             $guser->setDisplayname($user['displayName']);
             $guser->setAboutMe($user['aboutMe']);
             $guser->setUrl($user['url']);
+            $guser->setGender($user['gender']);
             $guser->setImage($user['image']['url']);
             $guser->setCreatedAt(new \DateTime());
             $guser->setUpdatedAt(new \DateTime());
