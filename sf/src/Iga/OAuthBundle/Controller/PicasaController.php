@@ -92,7 +92,7 @@ class PicasaController extends Controller
         $prequest = new \apiHttpRequest("https://picasaweb.google.com/data/feed/api/user/" . $user->getGoogleid() . "/albumid/" . $id,"GET");
         $presponse = $client->getIo()->makeRequest($prequest);
         
-        $aphotos = simplexml_load_string($presponse->getRsponseBody());
+        $aphotos = simplexml_load_string($presponse->getResponseBody());
         
         $photos = $aphotos['entry'];
         
