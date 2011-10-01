@@ -6,7 +6,7 @@
 {% if photos %}
 Seleccione una imágen.<br>
 {% for photo in photos %}
-<form action="{{ path('picasaSave', { 'eid' : eid) }}" method="POST">
+<form action="{{ path('picasaSave',{ 'eid' : eid}) }}" method="POST">
 <img src="{{ photo.src }}">
 <input type="hidden" name="src" value="{{ photo.src }}">
 <input type="hidden" name="type" value="{{ photo.type }}">

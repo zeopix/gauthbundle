@@ -32,7 +32,7 @@
                 {% for photo in entity.photos %}
                 <img title="{{ photo.title }}" src="{{ photo.src }}" height="100px" width="100px">
                 {% endfor %}
-                <a class="btn primary" href="{{ path('picasa',{ 'eid' : eid }) }}">Añadir foto</a>
+                <a class="btn primary" href="{{ path('picasa',{ 'eid' : entity.id }) }}">Añadir foto</a>
             </td>
         </tr>
     </tbody>

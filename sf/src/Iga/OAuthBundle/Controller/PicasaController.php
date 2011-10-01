@@ -106,8 +106,10 @@ class PicasaController extends Controller
         $user = $this->checkUser($me);
         $albums = $this->getAlbums($client,$user->getGoogleid());
         
-        
-        
+        /*
+        $albums = Array();
+        $photos = Array();
+        */
         
              return $this->render('IgaOAuthBundle:Picasa:albums.html.twig',Array('albums'=>$albums,'photos'=>false,'eid'=>$eid));
              
