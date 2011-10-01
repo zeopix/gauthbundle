@@ -8,7 +8,7 @@
 {% endblock %}
 {% block sidebar %}
 {% for album in albums %}
-<h3><a href="{{ path('picasaAlbum',{ 'id' : album.id }) }}">{{ album.title }}</a></h3>
+<h3><a href="{{ path('picasaAlbum',{ 'id' : album.id }) }}">{{ album.title }}</a></h3>
 
 
 {% endfor %}
