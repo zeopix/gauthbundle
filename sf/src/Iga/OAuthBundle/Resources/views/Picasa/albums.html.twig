@@ -1,0 +1,15 @@
+{% extends 'IgaOAuthBundle::sidelayout.html.twig' %}
+{% block main %}
+{% if photos %}
+{% for photo in photos %}
+<img src="{{ photo.content.attributes.src }}">
+{% endfor %}
+{% endif %}
+{% endblock %}
+{% block sidebar %}
+{% for album in albums %}
+<h3><a href="#" id="{{>{{ album.title }}</a></h3>
+
+
+{% endfor %}
+{% endblock %}

@@ -47,14 +47,76 @@ class PicasaController extends Controller
         $request = new \apiHttpRequest("https://picasaweb.google.com/data/feed/api/user/" . $user->getGoogleid(),"GET");
         $response = $client->getIo()->makeRequest($request);
         
-        $albums = simplexml_load_string($response->getResponseBody());
+        $aresponse = simplexml_load_string($response->getResponseBody());
+        
+        $albums = $aresponse['entry'];
+        
+        foreach($albums as $key=>$album){
+            $url = $album['id'];
+            $parts = explode($url,"/");
+            $album['id'] = $parts[(count($parts)-1)];
+            $albums[$key]= $album;
+            
+        }
         
         
         
-        ob_start();
-            print_r($albums);
-            $v = ob_get_clean();
-             return new Response($v);
+        
+             return $this->render('IgaOAuthBundle:Picasa:albums.html.twig',Array('albums'=>$albums,'photos'=>false));
+             
+    }
+    /**
+     * @Route("/picasa/album/{id}", name="picasaAlbum")
+     */
+    public function picasaAlbumAction($id)
+    {
+        
+
+// update the second argument to be CompanyName-ProductName-Version
+
+        $session = $this->getRequest()->getSession();
+        $client = $this->getClient();
+        $authUrl = $client->createAuthUrl();
+        $at =  $session->get('access_token');
+        if(!isset($at)){
+            //do normal
+            return $this->redirect($this->generateUrl('GoogleToken'));
+            
+        }
+        
+        
+        $client->setAccessToken($at);
+
+        
+        $plus = $this->getPlus($client);
+        $me = $plus->people->get('me');
+        
+        $user = $this->checkUser($me);
+        
+        
+        $request = new \apiHttpRequest("https://picasaweb.google.com/data/feed/api/user/" . $user->getGoogleid(),"GET");
+        $response = $client->getIo()->makeRequest($request);
+        
+        $aresponse = simplexml_load_string($response->getResponseBody());
+        
+        $albums = $aresponse['entry'];
+        
+        foreach($albums as $key=>$album){
+            $url = $album['id'];
+            $parts = explode($url,"/");
+            $album['id'] = $parts[(count($parts)-1)];
+            $albums[$key]= $album;
+            
+        }
+        
+        $prequest = new \apiHttpRequest("https://picasaweb.google.com/data/feed/api/user/" . $user->getGoogleid() . "/albumid/" . $id,"GET");
+        $presponse = $client->getIo()->makeRequest($prequest);
+        
+        $aphotos = simplexml_load_string($presponse->getRsponseBody());
+        
+        $photos = $aphotos['entry'];
+        
+             return $this->render('IgaOAuthBundle:Picasa:albums.html.twig',Array('albums'=>$albums,'photos'=>$photos));
              
     }
   
