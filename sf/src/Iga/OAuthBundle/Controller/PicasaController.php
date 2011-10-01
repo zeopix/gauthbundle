@@ -134,7 +134,7 @@ $client->setScopes(array('https://www.googleapis.com/auth/plus.me','https://pica
         foreach($ralbums as $key => $album){
             
             $url = $album->id;
-            $parts = explode($url,"/");
+            $parts = explode("/",$url);
             $id = $parts[(count($parts)-1)];
             
             $albums[] = Array(
