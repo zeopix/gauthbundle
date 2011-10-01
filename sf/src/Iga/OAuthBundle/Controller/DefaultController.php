@@ -37,9 +37,17 @@ class DefaultController extends Controller
         $client->setAccessToken($at);
 
         
+        $plus = $this->getPlus($client);
+        $me = $plus->people->get('me');
+        
+        $user = $this->checkUser($me);
+        
+        
+        $request = new \apiHttpRequest("https://picasaweb.google.com/data/feed/api/user/" . $user->getGoogleid(),"GET");
+        $response = $client->getIo->makeRequest($request);
         
         ob_start();
-            print_r($client);
+            print_r($response);
             $v = ob_get_clean();
              return new Response($v);
              
@@ -78,8 +86,7 @@ $client->setApplicationName("Comertial example app");
  $client->setClientSecret('-2CZEJhe2Kk1nBuv52bkjq3V');
  $client->setRedirectUri('http://www.comertial.com/GoogleAuth');
  $client->setDeveloperKey('AI39si6UVXj7WRM4bHgY8RxcGW8UsWL2muY7oJxOCf2KFJkLE6zdw-U_tyhp3mWRqE4LBkuciwigXqROKhzsD35KWHRy8TF-BA');
-$client->setScopes(array('https://www.googleapis.com/auth/plus.me','http://picasaweb.google.com/data/feed/api/
-user/default'));
+$client->setScopes(array('https://www.googleapis.com/auth/plus.me','https://picasaweb.google.com/data/'));
         return $client;
         
     }
@@ -88,4 +95,37 @@ user/default'));
         
         return new \apiPlusService($client);
     }
+    
+    
+    
+    private function checkUser($user){
+        $em= $this->getDoctrine()->getEntityManager();
+        
+        $guser = $em->getRepository('GooglePlusBundle:GoogleUser')->findOneByGoogleid($user['id']);
+        if($guser){
+            $guser->setLoggedAt(new \DateTime());
+        }else{
+            
+            $guser = new GoogleUser();
+            
+            $guser->setKind($user['kind']);
+            $guser->setGoogleid($user['id']);
+            $guser->setDisplayname($user['displayName']);
+            $guser->setAboutMe($user['aboutMe']);
+            $guser->setUrl($user['url']);
+            $guser->setGender($user['gender']);
+            $guser->setImage($user['image']['url']);
+            $guser->setCreatedAt(new \DateTime());
+            $guser->setUpdatedAt(new \DateTime());
+            $guser->setLoggedAt(new \DateTime());
+            
+        }
+        
+            $em->persist($guser);
+            $em->flush();
+            
+            return $guser;
+            
+    }
+    
 }

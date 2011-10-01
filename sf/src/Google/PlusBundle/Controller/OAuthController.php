@@ -77,8 +77,7 @@ $client->setApplicationName("Google+ PHP Starter Application");
  $client->setClientSecret('-2CZEJhe2Kk1nBuv52bkjq3V');
  $client->setRedirectUri('http://www.comertial.com/GoogleAuth');
  $client->setDeveloperKey('AI39si6UVXj7WRM4bHgY8RxcGW8UsWL2muY7oJxOCf2KFJkLE6zdw-U_tyhp3mWRqE4LBkuciwigXqROKhzsD35KWHRy8TF-BA');
-$client->setScopes(array('https://www.googleapis.com/auth/plus.me','http://picasaweb.google.com/data/feed/api/
-user/default'));
+$client->setScopes(array('https://www.googleapis.com/auth/plus.me','https://picasaweb.google.com/data/'));
         return $client;
         
     }
