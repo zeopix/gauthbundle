@@ -153,7 +153,7 @@ $client->setScopes(array('https://www.googleapis.com/auth/plus.me','https://pica
             $id = $parts[(count($parts)-1)];
             
             ob_start();
-            print_r($photo->content);
+            print_r($photo->content['@attributes']);
             die(ob_get_clean());
             
             $photos[] = Array(
