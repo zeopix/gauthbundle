@@ -44,11 +44,10 @@ class DefaultController extends Controller
         $user = $this->checkUser($me);
         
         
-        $request = new \apiHttpRequest("https://picasaweb.google.com/data/feed/api/user/" . $user->getGoogleid(),"GET");
-        $response = $client->getIo()->makeRequest($request);
+        //$plus->people->get("me");
         
         ob_start();
-            print_r($response);
+            print_r($me);
             $v = ob_get_clean();
              return new Response($v);
              
