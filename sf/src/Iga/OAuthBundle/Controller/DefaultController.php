@@ -20,10 +20,24 @@ class DefaultController extends Controller
     public function testAction()
     {
         
-        $client = $this->getClient();
 
 // update the second argument to be CompanyName-ProductName-Version
 
+        $session = $this->getRequest()->getSession();
+        $client = $this->getClient();
+        $authUrl = $client->createAuthUrl();
+        $at =  $session->get('access_token');
+        if(!isset($at)){
+            //do normal
+            return $this->redirect($this->generateUrl('GoogleToken'));
+            
+        }
+        
+        
+        $client->setAccessToken($at);
+
+        
+        
         ob_start();
             print_r($client);
             $v = ob_get_clean();
