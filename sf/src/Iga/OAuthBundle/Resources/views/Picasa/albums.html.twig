@@ -1,13 +1,24 @@
 {% extends 'IgaOAuthBundle::sidelayout.html.twig' %}
+{% block head %}
+<img style="float:left; margin-right: 10px; " src="{{ asset('bundles/igaoauth/images/picasa.png') }}"> <h1  style="float:left;">Añade una foto desde picasa</h1>
+<div style="clear:both"></div>{% endblock %}
 {% block main %}
 {% if photos %}
+Seleccione una imágen.<br>
 {% for photo in photos %}
+<form action="{{ path('picasaSave', { 'eid' : eid) }}" method="POST">
 <img src="{{ photo.src }}">
+<input type="hidden" name="src" value="{{ photo.src }}">
+<input type="hidden" name="type" value="{{ photo.type }}">
+<input type="hidden" name="title" value="{{ photo.title }}">
+<input type="hidden" name="id" value="{{ photo.id }}">
+<input type="submit" class="btn success" value="Seleccionar">
 {% endfor %}
 {% endif %}
 {% endblock %}
 {% block sidebar %}
 {% for album in albums %}
+<h2>Álbumes web</h2>
 <h3><a href="{{ path('picasaAlbum',{ 'id' : album.id }) }}">{{ album.title }}</a></h3>
 
 

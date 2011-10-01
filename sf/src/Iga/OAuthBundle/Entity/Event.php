@@ -78,6 +78,12 @@ class Event
     private $updatedAt;
 
 
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Photo", mappedBy="event")
+     */
+    private $photos;
+    
     /**
      * Get id
      *
@@ -246,5 +252,15 @@ class Event
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+    
+    public function getPhotos(){
+        return $this->photos;
+        
+    }
+    
+    public function addPhoto($photo){
+        $this->photos[] = $photo;
+        
     }
 }

@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Google\PlusBundle\Entity\GoogleUser;
+use Iga\OAuthBundle\Entity\Photo;
 use \Zend_Gdata_Photos;
 use \Zend_Gdata_ClientLogin;
 
@@ -15,10 +16,71 @@ require_once dirname(__FILE__) . '/../../../../vendor/Sf2GoogleApi/src/contrib/a
 
 class PicasaController extends Controller
 {
+    
     /**
-     * @Route("/picasa/me", name="picasa")
+     * @Route("/picasa/save/{eid}/{pid}", name="picasaSave")
      */
-    public function picasaAction()
+    public function picasaSaveAction($eid,$pid){
+        
+        $session = $this->getRequest()->getSession();
+        $client = $this->getClient();
+        $authUrl = $client->createAuthUrl();
+        $at =  $session->get('access_token');
+        if(!isset($at)){
+            //do normal
+            return $this->redirect($this->generateUrl('GoogleToken'));
+            
+        }
+        
+        
+        $client->setAccessToken($at);
+
+        
+        $plus = $this->getPlus($client);
+        $me = $plus->people->get('me');
+        
+        $user = $this->checkUser($me);
+        
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        $request = $this->getRequest()->request;
+        
+        $evt = $em->getRepository('IgaOAuthBundle:Event')->find($eid);
+        
+        if($evt){
+            
+            $pid = $request->get('id');
+            $title = $request->get('title');
+            $src = $request->get('src');
+            
+            if(strlen($src) > 0){
+                
+                $photo = new Photo;
+                $photo->setEvent($evt);
+                $photo->setGoogleid($pid);
+                $photo->setPath($src);
+                $photo->setTitle($title);
+                $photo->setSlug($title);
+                $photo->setGoogleuser($user->getGoogleid());
+                $photo->setCreatedAt(new \DateTime());
+                
+                $em->persist($photo);
+                $em->flush();
+            }
+            
+            
+        }
+        
+        return $this->redirect($this->generateUrl('event_show',Array('id' => $eid )));
+
+    }
+    
+    
+    /**
+     * @Route("/picasa/{eid}", name="picasa")
+     */
+    public function picasaAction($eid)
     {
         
 
@@ -47,15 +109,13 @@ class PicasaController extends Controller
         
         
         
-        
-        
-             return $this->render('IgaOAuthBundle:Picasa:albums.html.twig',Array('albums'=>$albums,'photos'=>false));
+             return $this->render('IgaOAuthBundle:Picasa:albums.html.twig',Array('albums'=>$albums,'photos'=>false,'eid'=>$eid));
              
     }
     /**
-     * @Route("/picasa/album/{id}", name="picasaAlbum")
+     * @Route("/picasa/{eid}/{id}", name="picasaAlbum")
      */
-    public function picasaAlbumAction($id)
+    public function picasaAlbumAction($eid,$id)
     {
         
 
@@ -71,7 +131,6 @@ class PicasaController extends Controller
             
         }
         
-        
         $client->setAccessToken($at);
 
         
@@ -79,11 +138,11 @@ class PicasaController extends Controller
         $me = $plus->people->get('me');
         
         $user = $this->checkUser($me);
-        
+       
         $albums = $this->getAlbums($client,$user->getGoogleid());
         $photos = $this->getPhotos($client,$user->getGoogleid(),$id);
         
-        return $this->render('IgaOAuthBundle:Picasa:albums.html.twig',Array('albums'=>$albums,'photos'=>$photos));
+        return $this->render('IgaOAuthBundle:Picasa:albums.html.twig',Array('albums'=>$albums,'photos'=>$photos,'eid'=>$eid));
              
     }
   
