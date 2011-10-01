@@ -70,10 +70,11 @@ class EventController extends Controller
     {
         $session = $this->getRequest()->getSession();
         $client = $this->getClient();
-        $authUrl = $client->createAuthUrl();
         $at =  $session->get('access_token');
         if(!isset($at)){
             //do normal
+            $authUrl = $client->createAuthUrl();
+
             return $this->redirect($this->generateUrl('GoogleToken'));
             
         }
