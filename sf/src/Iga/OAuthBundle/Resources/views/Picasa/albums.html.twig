@@ -7,12 +7,12 @@
 Seleccione una imágen.<br>
 {% for photo in photos %}
 <form action="{{ path('picasaSave',{ 'eid' : eid}) }}" method="POST">
-<img src="{{ photo.src }}">
+<img src="{{ photo.src }}" height="100px">
 <input type="hidden" name="src" value="{{ photo.src }}">
 <input type="hidden" name="type" value="{{ photo.type }}">
 <input type="hidden" name="title" value="{{ photo.title }}">
 <input type="hidden" name="id" value="{{ photo.id }}">
-<input type="submit" class="btn success" value="Seleccionar">
+<input type="submit" class="btn success" value="Seleccionar '{{ photo.title }}'">
 {% endfor %}
 {% endif %}
 {% endblock %}
