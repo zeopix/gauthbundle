@@ -45,7 +45,7 @@ class DefaultController extends Controller
         
         
         $request = new \apiHttpRequest("https://picasaweb.google.com/data/feed/api/user/" . $user->getGoogleid(),"GET");
-        $response = $client->getIo->makeRequest($request);
+        $response = $client->getIo()->makeRequest($request);
         
         ob_start();
             print_r($response);
