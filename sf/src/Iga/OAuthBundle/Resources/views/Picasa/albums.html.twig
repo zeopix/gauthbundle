@@ -2,7 +2,7 @@
 {% block main %}
 {% if photos %}
 {% for photo in photos %}
-<img src="{{ photo.content.attributes.src }}">
+<img src="{{ photo.src }}">
 {% endfor %}
 {% endif %}
 {% endblock %}
