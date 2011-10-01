@@ -30,21 +30,20 @@ class PicasaController extends Controller
         $at =  $session->get('access_token');
         if(!isset($at)){
             //do normal
-            //return $this->redirect($this->generateUrl('GoogleToken'));
+            return $this->redirect($this->generateUrl('GoogleToken'));
             
         }
         
         
-        //$client->setAccessToken($at);
+        $client->setAccessToken($at);
 
         
-        //$plus = $this->getPlus($client);
-        //$me = $plus->people->get('me');
+        $plus = $this->getPlus($client);
+        $me = $plus->people->get('me');
         
-        //$user = $this->checkUser($me);
-        //$albums = $this->getAlbums($client,$user->getGoogleid());
-        $user = Array();
-        $albums = Array();
+        $user = $this->checkUser($me);
+        $albums = $this->getAlbums($client,$user->getGoogleid());
+        
         
         
         
