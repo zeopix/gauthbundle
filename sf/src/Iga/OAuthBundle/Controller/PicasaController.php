@@ -80,23 +80,10 @@ class PicasaController extends Controller
         
         $user = $this->checkUser($me);
         
-        
-        $request = new \apiHttpRequest("https://picasaweb.google.com/data/feed/api/user/" . $user->getGoogleid(),"GET");
-        $response = $client->getIo()->makeRequest($request);
-        
-        $aresponse = simplexml_load_string($response->getResponseBody());
-        
         $albums = $this->getAlbums($client,$user->getGoogleid());
-
-                
-        $prequest = new \apiHttpRequest("https://picasaweb.google.com/data/feed/api/user/" . $user->getGoogleid() . "/albumid/" . $id,"GET");
-        $presponse = $client->getIo()->makeRequest($prequest);
+        $photos = $this->getPhotos($client,$user->getGoogleid(),$id);
         
-        $aphotos = simplexml_load_string($presponse->getResponseBody());
-        
-        $photos = $aphotos['entry'];
-        
-             return $this->render('IgaOAuthBundle:Picasa:albums.html.twig',Array('albums'=>$albums,'photos'=>$photos));
+        return $this->render('IgaOAuthBundle:Picasa:albums.html.twig',Array('albums'=>$albums,'photos'=>$photos));
              
     }
   
@@ -145,6 +132,36 @@ $client->setScopes(array('https://www.googleapis.com/auth/plus.me','https://pica
         }
         
         return $albums;
+        
+        
+    }
+    
+    
+    private function getPhotos(&$client,$gid,$albumid){
+        
+        $request = new \apiHttpRequest("https://picasaweb.google.com/data/feed/api/user/" . $gid . "/albumid/" . $albumid,"GET");
+        $response = $client->getIo()->makeRequest($request);
+        $photos = Array();
+        $aresponse = simplexml_load_string($response->getResponseBody());
+               
+        $rphotos = $aresponse->entry;
+        
+        foreach($rphotos as $key => $photo){
+            
+            $url = $photo->id;
+            $parts = explode("/",$url);
+            $id = $parts[(count($parts)-1)];
+            
+            $photos[] = Array(
+                'title' => $photo->title,
+                'id' => $id,
+                'src' => $photo->content->attributes->src,
+                'type' => $photo->content->attributes->type,
+            );
+            
+        }
+        
+        return $photos;
         
         
     }
