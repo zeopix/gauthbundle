@@ -14,7 +14,18 @@
 
     <!-- Le styles -->
     <link href="http://localhost/gauthbundle/sf/web/bundles/igaoauth/css/bootstrap.css" rel="stylesheet">
-    <link href="http://twitter.github.com/bootstrap//1.3.0/bootstrap.css" rel="stylesheet">
+    <link href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.css" rel="stylesheet">
+
+    <script src="{{ asset('bundles/igaoauth/js/jquery.js') }}" language="javascript"></script>
+    <script src="{{ asset('bundles/igaoauth/js/jquery.lazyload.js') }}" language="javascript"></script>
+    <script language="javascript">
+
+        $(function(){
+
+            $("img").lazyload();
+        })
+    </script>
+
     <style type="text/css">
       /* Override some defaults */
       html, body {
