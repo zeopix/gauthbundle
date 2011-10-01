@@ -155,8 +155,8 @@ $client->setScopes(array('https://www.googleapis.com/auth/plus.me','https://pica
             $photos[] = Array(
                 'title' => $photo->title,
                 'id' => $id,
-                'src' => $photo->content->attributes->src,
-                'type' => $photo->content->attributes->type,
+                'src' => $photo->content->src,
+                'type' => $photo->content->type,
             );
             
         }
