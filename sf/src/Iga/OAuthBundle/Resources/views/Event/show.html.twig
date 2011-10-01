@@ -42,11 +42,13 @@
 
 {% endblock %}
 {% block sidebar %}
+{% if boss %}
 <h2>Organizador</h2>
 <a style="float:left;" href="{{ boss.url }}"><img height="100px" src="{{ boss.image }}?sz=100"></a>
 <p>{{ boss.displayName }}</p>
 <div style="clear:both"></div>
 <br>
+{% endif %}
 <h3>104<span> asistentes</span></h3>
 <h3>236<span> invitados</span></h3>
 
