@@ -42,22 +42,9 @@ class PicasaController extends Controller
         $me = $plus->people->get('me');
         
         $user = $this->checkUser($me);
+        $albums = $this->getAlbums($user->getGoogleid());
         
         
-        $request = new \apiHttpRequest("https://picasaweb.google.com/data/feed/api/user/" . $user->getGoogleid(),"GET");
-        $response = $client->getIo()->makeRequest($request);
-        
-        $aresponse = simplexml_load_string($response->getResponseBody());
-               
-        $albums = $aresponse->entry;
-        
-        foreach($albums as $key => $album){
-            $url = $album->id;
-            $parts = explode($url,"/");
-            $album->id = $parts[(count($parts)-1)];
-            $albums[$key]= $album;
-            
-        }
         
         
         
@@ -99,16 +86,9 @@ class PicasaController extends Controller
         
         $aresponse = simplexml_load_string($response->getResponseBody());
         
-        $albums = $aresponse['entry'];
-        
-        foreach($albums as $key=>$album){
-            $url = $album['id'];
-            $parts = explode($url,"/");
-            $album['id'] = $parts[(count($parts)-1)];
-            $albums[$key]= $album;
-            
-        }
-        
+        $albums = $this->getAlbums($user->getGoogleid());
+
+                
         $prequest = new \apiHttpRequest("https://picasaweb.google.com/data/feed/api/user/" . $user->getGoogleid() . "/albumid/" . $id,"GET");
         $presponse = $client->getIo()->makeRequest($prequest);
         
@@ -142,7 +122,32 @@ $client->setScopes(array('https://www.googleapis.com/auth/plus.me','https://pica
     }
     
     
-    
+    private function getAlbums($gid){
+        
+        $request = new \apiHttpRequest("https://picasaweb.google.com/data/feed/api/user/" . $gid,"GET");
+        $response = $client->getIo()->makeRequest($request);
+        $albums = Array();
+        $aresponse = simplexml_load_string($response->getResponseBody());
+               
+        $ralbums = $aresponse->entry;
+        
+        foreach($ralbums as $key => $album){
+            
+            $url = $album->id;
+            $parts = explode($url,"/");
+            $id = $parts[(count($parts)-1)];
+            
+            $albums[] = Array(
+                'title' => $album->title,
+                'id' => $id,
+            );
+            
+        }
+        
+        return $albums;
+        
+        
+    }
     private function checkUser($user){
         $em= $this->getDoctrine()->getEntityManager();
         
