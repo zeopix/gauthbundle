@@ -17,8 +17,9 @@ Seleccione una imágen.<br>
 {% endif %}
 {% endblock %}
 {% block sidebar %}
-{% for album in albums %}
 <h2>Álbumes web</h2>
+
+{% for album in albums %}
 <h3><a href="{{ path('picasaAlbum',{ 'id' : album.id, 'eid' : eid }) }}">{{ album.title }}</a></h3>
 
 

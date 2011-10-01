@@ -18,9 +18,9 @@ class PicasaController extends Controller
 {
     
     /**
-     * @Route("/picasa/save/{eid}/{pid}", name="picasaSave")
+     * @Route("/picasa/save/{eid}/", name="picasaSave")
      */
-    public function picasaSaveAction($eid,$pid){
+    public function picasaSaveAction($eid){
         
         $session = $this->getRequest()->getSession();
         $client = $this->getClient();
