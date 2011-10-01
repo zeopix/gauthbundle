@@ -88,7 +88,7 @@ class EventController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        $boss = $em->getRepository('GooglePlusBundle:GoogleUser')->findOneByGoogleid($entity->getGoogleuser);
+        $boss = $em->getRepository('GooglePlusBundle:GoogleUser')->findOneByGoogleid($entity->getGoogleuser());
         if(!$boss){ $boss = false;}
         return array(
             'entity'      => $entity,
