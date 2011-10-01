@@ -43,7 +43,10 @@
 {% endblock %}
 {% block sidebar %}
 <h2>Organizador</h2>
-<p>Lorem impsut</p><br>
+<a style="float:left;" href="{{ boss.url }}"><img height="100px" src="{{ boss.image }}"></a>
+<p>{{ boss.displayName }}</p>
+<div style="clear:both"></div>
+<br>
 <h3>104<span> asistentes</span></h3>
 <h3>236<span> invitados</span></h3>
 

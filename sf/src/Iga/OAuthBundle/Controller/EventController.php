@@ -88,8 +88,11 @@ class EventController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
+        $boss = $em->getRepository('GooglePlusBundle:GoogleUser')->findOneByGoogleid($entity->getGoogleuser);
+        if(!$boss){ $boss = false;}
         return array(
             'entity'      => $entity,
+            'boss' => $boss,
             'delete_form' => $deleteForm->createView(),        );
     }
 
@@ -128,6 +131,25 @@ class EventController extends Controller
      */
     public function createAction()
     {
+        $session = $this->getRequest()->getSession();
+        $client = $this->getClient();
+        $authUrl = $client->createAuthUrl();
+        $at =  $session->get('access_token');
+        if(!isset($at)){
+            //do normal
+            return $this->redirect($this->generateUrl('GoogleToken'));
+            
+        }
+        
+        
+        $client->setAccessToken($at);
+
+        $plus = $this->getPlus($client);
+        $me = $plus->people->get('me');
+        
+        $user = $this->checkUser($me);
+        
+        
         $entity  = new Event();
         $request = $this->getRequest();
         $form    = $this->createForm(new EventType(), $entity);
@@ -138,7 +160,7 @@ class EventController extends Controller
             
             $entity->setCreatedAt(new \DateTime());
             $entity->setUpdatedAt(new \DateTime());
-            $entity->setGoogleUser(0);
+            $entity->setGoogleUser($user->getGoogleid());
             $em->persist($entity);
             $em->flush();
 
