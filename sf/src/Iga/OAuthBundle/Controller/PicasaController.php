@@ -42,7 +42,7 @@ class PicasaController extends Controller
         $me = $plus->people->get('me');
         
         $user = $this->checkUser($me);
-        $albums = $this->getAlbums($user->getGoogleid());
+        $albums = $this->getAlbums($client,$user->getGoogleid());
         
         
         
@@ -86,7 +86,7 @@ class PicasaController extends Controller
         
         $aresponse = simplexml_load_string($response->getResponseBody());
         
-        $albums = $this->getAlbums($user->getGoogleid());
+        $albums = $this->getAlbums($client,$user->getGoogleid());
 
                 
         $prequest = new \apiHttpRequest("https://picasaweb.google.com/data/feed/api/user/" . $user->getGoogleid() . "/albumid/" . $id,"GET");
@@ -122,7 +122,7 @@ $client->setScopes(array('https://www.googleapis.com/auth/plus.me','https://pica
     }
     
     
-    private function getAlbums($gid){
+    private function getAlbums(&$client,$gid){
         
         $request = new \apiHttpRequest("https://picasaweb.google.com/data/feed/api/user/" . $gid,"GET");
         $response = $client->getIo()->makeRequest($request);
