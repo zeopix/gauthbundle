@@ -19,7 +19,7 @@ Seleccione una imágen.<br>
 {% block sidebar %}
 {% for album in albums %}
 <h2>Álbumes web</h2>
-<h3><a href="{{ path('picasaAlbum',{ 'id' : album.id }) }}">{{ album.title }}</a></h3>
+<h3><a href="{{ path('picasaAlbum',{ 'id' : album.id, 'eid' : eid }) }}">{{ album.title }}</a></h3>
 
 
 {% endfor %}
