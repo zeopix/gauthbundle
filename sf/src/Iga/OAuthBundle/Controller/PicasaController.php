@@ -48,13 +48,13 @@ class PicasaController extends Controller
         $response = $client->getIo()->makeRequest($request);
         
         $aresponse = simplexml_load_string($response->getResponseBody());
+               
+        $albums = $aresponse->entry;
         
-        $albums = $aresponse['entry'];
-        
-        foreach($albums as $key=>$album){
-            $url = $album['id'];
+        foreach($albums as $key => $album){
+            $url = $album->id;
             $parts = explode($url,"/");
-            $album['id'] = $parts[(count($parts)-1)];
+            $album->id = $parts[(count($parts)-1)];
             $albums[$key]= $album;
             
         }
