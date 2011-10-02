@@ -11,11 +11,13 @@
 	<div data-role="content">
 		<div class="content-primary">
 	
-
+<h1>Selecciona un album de Google Picasa:</h1>
                         <ul data-role="listview">
                                 {% for album in albums %}
 				<li><a href="{{ path('mobilePicasaAlbum', { 'eid' : eid , 'id' :album.id }) }}">{{ album.title }}</a></li>
                                 {% endfor %}
+				<li><a href="{{ path('mobile_event_show', { 'id' : eid }) }}">Volver atrás</a></li>
+
 </ul>
 		
 		</div><!--/content-primary -->		

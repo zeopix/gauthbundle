@@ -11,7 +11,7 @@
 	<div data-role="content">
 		<div class="content-primary">
 	
-
+<h1>Selecciona una foto</h1>
                         <ul data-role="listview">
                                 {% for photo in photos %}
                                 <form action="{{ path('mobilePicasaSave', { 'eid' : eid }) }}" method="POST">
@@ -21,14 +21,14 @@
 <input type="hidden" name="title" value="{{ photo.title }}">
 <input type="hidden" name="id" value="{{ photo.id }}">
 
-				<li><img src="{{ photo.src }}" />
+				<li><img src="{{ photo.src }}" height="80px" />
                                     <h3><input type="submit" value="{{ album.title }}"></h3>
 				
                                 </li>
                                 </form>
 
                                 {% endfor %}
-</ul>
+				<li><a href="{{ path('mobile_event_show', { 'id' : eid }) }}">Volver atrás</a></li>
 
 		
 		</div><!--/content-primary -->		
