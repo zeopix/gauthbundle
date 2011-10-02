@@ -35,18 +35,20 @@ class MobileController extends Controller
         $at =  $session->get('access_token');
         
         if((!isset($at)) || ($at == false)){
-            return $this->redirect($this->generateUrl('GoogleToken'));
+            //return $this->redirect($this->generateUrl('GoogleToken'));
         }
         
         try{
-            $client->setAccessToken($at);
-            $plus = $this->getPlus($client);
-            $me = $plus->people->get('me');
-            $user = $this->checkUser($me);
+            //$client->setAccessToken($at);
+            //$plus = $this->getPlus($client);
+            //$me = $plus->people->get('me');
+            //$user = $this->checkUser($me);
+            
         }catch(Exception $e){
             return $this->redirect($this->generateUrl('GoogleToken'));
         }
-        
+            
+        $user = Array();
         
         $em = $this->getDoctrine()->getEntityManager();
         $entities = $em->getRepository('IgaOAuthBundle:Event')->findAll();
