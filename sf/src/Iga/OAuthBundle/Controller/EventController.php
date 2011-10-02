@@ -34,7 +34,7 @@ class EventController extends Controller
         $authUrl = $client->createAuthUrl();
         $at =  $session->get('access_token');
         
-        if(!isset($at)){
+        if((!isset($at)) || ($at == false)){
             return $this->redirect($this->generateUrl('GoogleToken'));
         }
         
