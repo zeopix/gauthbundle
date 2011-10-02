@@ -1,0 +1,6 @@
+[submodule "sf/vendor/bundles/Ano/GoogleMapsBundle"]
+	path = sf/vendor/bundles/Ano/GoogleMapsBundle
+	url = http://github.com/benjamindulau/AnoGoogleMapsBundle.git
+[submodule "sf/vendor/bundles/Ano/Bundle/GoogleMapsBundle"]
+	path = sf/vendor/bundles/Ano/Bundle/GoogleMapsBundle
+	url = http://github.com/benjamindulau/AnoGoogleMapsBundle.git

@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Iga\OAuthBundle\IgaOAuthBundle(),
             new Google\PlusBundle\GooglePlusBundle(),
+            new Ano\Bundle\GoogleMapsBundle\AnoGoogleMapsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

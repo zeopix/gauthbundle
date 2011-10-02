@@ -28,7 +28,7 @@ class MobileController extends Controller
      */
     public function indexAction()
     {
-        /*
+        
         $session = $this->getRequest()->getSession();
         $client = $this->getClient();
         $authUrl = $client->createAuthUrl();
@@ -43,17 +43,16 @@ class MobileController extends Controller
             $plus = $this->getPlus($client);
             $me = $plus->people->get('me');
             $user = $this->checkUser($me);
-        }catch(Exceptino $e){
+        }catch(Exception $e){
             return $this->redirect($this->generateUrl('GoogleToken'));
         }
         
-        */
+        
         $em = $this->getDoctrine()->getEntityManager();
         $entities = $em->getRepository('IgaOAuthBundle:Event')->findAll();
         //$client = $this->getClient();
         $id = 1;
         
-        $user = Array();
         return array('entities' => $entities, 'user' => $user);
     }
 
