@@ -12,8 +12,12 @@ class EventType extends AbstractType
         $builder
             ->add('title')
             ->add('location')
-            ->add('start')
-            ->add('end')
+            ->add('start', 'genemu_jquerydate', array(
+        'widget' => 'single_text'
+    ))
+            ->add('end', 'genemu_jquerydate', array(
+        'widget' => 'single_text'
+    ))
             ->add('info')
         ;
     }

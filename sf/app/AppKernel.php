@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Iga\OAuthBundle\IgaOAuthBundle(),
             new Google\PlusBundle\GooglePlusBundle(),
             new Ano\Bundle\GoogleMapsBundle\AnoGoogleMapsBundle(),
+            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

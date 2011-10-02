@@ -106,7 +106,7 @@ class EventController extends Controller
         $at =  $session->get('access_token');
         if(!isset($at)){
             //do normal
-            return $this->redirect($this->generateUrl('GoogleToken'));
+            //return $this->redirect($this->generateUrl('GoogleToken'));
             
         }
         $entity = new Event();

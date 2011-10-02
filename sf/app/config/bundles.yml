@@ -1,0 +1,20 @@
+genemu_form:
+    tinymce:
+        theme:       advanced
+        script_url:  /tinymce/tiny_mce.js
+        configs:
+            width:                           500px
+            height:                          200px
+            theme_advanced_toolbar_location: top
+
+    recaptcha:
+        public_key:  your public key
+        private_key: your private key
+        options:
+            theme:   clean
+            use_ssl: false
+    jquerydate:
+        configs:
+            buttonImage:     /images/date_button.png
+            buttonImageOnly: true
+            showAnim:        show

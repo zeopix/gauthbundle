@@ -1,0 +1,8 @@
+<table class="zebra-striped">
+    {% for result in search.results %}
+    <tr>
+        <td class="addrss">{{ result.formatted_address }}</td>
+        <td><a class="btn success choose">Elegir</a></td>
+    </tr>
+    {% endfor %}
+</table>

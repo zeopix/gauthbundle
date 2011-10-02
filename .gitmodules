@@ -4,3 +4,6 @@
 [submodule "sf/vendor/bundles/Ano/Bundle/GoogleMapsBundle"]
 	path = sf/vendor/bundles/Ano/Bundle/GoogleMapsBundle
 	url = http://github.com/benjamindulau/AnoGoogleMapsBundle.git
+[submodule "sf/vendors/bundles/Genemu/FormBundle"]
+	path = sf/vendors/bundles/Genemu/FormBundle
+	url = https://github.com/genemu/GenemuFormBundle.git
