@@ -28,34 +28,29 @@ class EventController extends Controller
      */
     public function indexAction()
     {
+        
         $session = $this->getRequest()->getSession();
         $client = $this->getClient();
         $authUrl = $client->createAuthUrl();
         $at =  $session->get('access_token');
+        
         if(!isset($at)){
-            //do normal
             return $this->redirect($this->generateUrl('GoogleToken'));
-            
         }
         
-        
-        $client->setAccessToken($at);
-
-        $plus = $this->getPlus($client);
-        $me = $plus->people->get('me');
-        
-        $user = $this->checkUser($me);
-       
+        try{
+            $client->setAccessToken($at);
+            $plus = $this->getPlus($client);
+            $me = $plus->people->get('me');
+            $user = $this->checkUser($me);
+        }catch(Exceptino $e){
+            return $this->redirect($this->generateUrl('GoogleToken'));
+        }
         
         $em = $this->getDoctrine()->getEntityManager();
-
         $entities = $em->getRepository('IgaOAuthBundle:Event')->findAll();
-
         //$client = $this->getClient();
-        
         $id = 1;
-        
-        
         
         return array('entities' => $entities, 'user' => $user);
     }
