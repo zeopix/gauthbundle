@@ -17,7 +17,7 @@ $("#iga_oauthbundle_eventtype_location").keyup(function(){
 $(".choose").live('click',function(){
     var vr = $(this).parent().prev().html();
     $("#iga_oauthbundle_eventtype_location").attr("value",vr);
-    $("#iga_oauthbundle_eventtype_location").attr("disabled","disabled");
+    //$("#iga_oauthbundle_eventtype_location").attr("disabled","disabled");
     $("#info").fadeOut();
     $("#info").html("<a id='change' class='btn warning' href='#'>Cambiar</a>");
     $("#info").fadeIn();
