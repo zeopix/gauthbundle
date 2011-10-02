@@ -174,7 +174,7 @@ class MobileController extends Controller
     
     
     /**
-     * @Route("/picasa/save/{eid}/", name="mobilePicasaSave")
+     * @Route("/savephoto/{eid}/", name="mobilePicasaSave")
      */
     public function mobilePicasaSaveAction($eid){
         
