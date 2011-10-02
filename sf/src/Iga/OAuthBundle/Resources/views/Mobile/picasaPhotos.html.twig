@@ -1,0 +1,42 @@
+{% extends 'IgaOAuthBundle:Mobile:layout.html.twig' %}
+{% block content %}
+
+
+	<div data-role="header">
+		<h1>Comertial.com</h1>
+	</div><!-- /header -->
+
+
+
+	<div data-role="content">
+		<div class="content-primary">
+	
+
+                        <ul data-role="listview">
+                                {% for photo in photos %}
+                                <form action="{{ path('mobilePicasaSave', { 'eid' : eid }) }}" method="POST">
+
+<input type="hidden" name="src" value="{{ photo.src }}">
+<input type="hidden" name="type" value="{{ photo.type }}">
+<input type="hidden" name="title" value="{{ photo.title }}">
+<input type="hidden" name="id" value="{{ photo.id }}">
+
+				<li><img src="{{ photo.src }}" />
+                                    <h3><input type="submit" value="{{ album.title }}"></h3>
+				
+                                </li>
+                                </form>
+
+                                {% endfor %}
+</ul>
+		
+		</div><!--/content-primary -->		
+
+
+
+	<div data-role="footer" data-theme="d">
+		<h4>© ManyFew</h4>
+	</div><!-- /footer -->
+
+
+{% endblock %}

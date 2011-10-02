@@ -1,0 +1,45 @@
+{% extends 'IgaOAuthBundle:Mobile:layout.html.twig' %}
+{% block content %}
+
+
+	<div data-role="header">
+		<h1>Comertial.com</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" id="one">	
+		<h2><h1>{{ entity.title }}</h1></h2>
+
+		<div data-role="controlgroup" data-type="horizontal" >
+			<a href="#" data-role="button" >3 invitados</a>
+			<a href="#" data-role="button" >4 asistentes</a>
+		</div>
+
+
+<span><h4 style="display:inline;">En: </h4>{{ entity.location }}</span><br>
+<span><h4 style="display:inline;">Empieza: </h4>{{ entity.start|date('Y-m-d H:i:s') }}</span><br>
+<span><h4 style="display:inline;">Acaba: </h4>{{ entity.end|date('Y-m-d H:i:s') }}</span>
+
+<h3>Más información</h3>
+{{ entity.info }}
+<h3>Fotos</h3>
+{% for photo in entity.photos %}
+                <img title="{{ photo.title }}" src="{{ photo.path }}" height="100px" width="100px">
+                {% endfor %}
+
+{% if boss %}
+<h2>Organizador</h2>
+<a style="float:left;" href="{{ boss.url }}"><img height="100px" src="{{ boss.image }}?sz=100"></a>
+<p>{{ boss.displayName }}</p>
+<div style="clear:both"></div>
+<br>
+{% endif %}
+
+<h3>Acciones:</h3>
+		<div data-role="controlgroup" data-type="horizontal" >
+			<a href="{{ path('mobile_picasa',{ 'eid' : entity.id }) }}" data-role="button" >Añadir foto</a>
+			<a href="{{ path('mobile') }}" data-role="button" >Confirmar Evento</a>
+			<a href="{{ path('mobile') }}" data-role="button" >Volver Atrás</a>
+		</div>
+   
+</div>
+{% endblock %}

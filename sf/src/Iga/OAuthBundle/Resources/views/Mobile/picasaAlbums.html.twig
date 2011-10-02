@@ -1,0 +1,30 @@
+{% extends 'IgaOAuthBundle:Mobile:layout.html.twig' %}
+{% block content %}
+
+
+	<div data-role="header">
+		<h1>Comertial.com</h1>
+	</div><!-- /header -->
+
+
+
+	<div data-role="content">
+		<div class="content-primary">
+	
+
+                        <ul data-role="listview">
+                                {% for album in albums %}
+				<li><a href="{{ path('mobilePicasaAlbum', { 'eid' : eid , 'id' :album.id }) }}">{{ album.title }}</a></li>
+                                {% endfor %}
+</ul>
+		
+		</div><!--/content-primary -->		
+
+
+
+	<div data-role="footer" data-theme="d">
+		<h4>© ManyFew</h4>
+	</div><!-- /footer -->
+
+
+{% endblock %}
