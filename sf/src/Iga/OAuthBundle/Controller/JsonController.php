@@ -35,7 +35,7 @@ class JsonController extends Controller
         $at =  $session->get('access_token');
         
         if((!isset($at)) || ($at == false)){
-            return $this->redirect($this->generateUrl('GoogleToken'));
+            //return $this->redirect($this->generateUrl('GoogleToken'));
         }
         
         try{
@@ -51,9 +51,12 @@ class JsonController extends Controller
         $user = Array();
         
         $em = $this->getDoctrine()->getEntityManager();
-        $entities = $em->getRepository('IgaOAuthBundle:Event')->findAll();
+        //$entities = $em->getRepository('IgaOAuthBundle:Event')->findAll();
+        $entities = $em->createQuery("SELECT e.id,e.title,e.start,e.end,e.info FROM IgaOAuthBundle:Event e")->getResult();
         //$client = $this->getClient();
         $id = 1;
+        
+        
         
         return new Response(json_encode(Array('entities' => $entities, 'user' => $user)));
     }
