@@ -29,6 +29,20 @@ class Event
     private $title;
 
     /**
+     * @var float $lat
+     *
+     * @ORM\Column(name="lat", type="float")
+     */
+    private $lat;
+
+    /**
+     * @var float $lng
+     *
+     * @ORM\Column(name="lng", type="float")
+     */
+    private $lng;
+
+    /**
      * @var string $location
      *
      * @ORM\Column(name="location", type="string", length=255)
@@ -262,5 +276,49 @@ class Event
     public function addPhoto($photo){
         $this->photos[] = $photo;
         
+    }
+    public function __construct()
+    {
+        $this->photos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Set lat
+     *
+     * @param float $lat
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+    }
+
+    /**
+     * Get lat
+     *
+     * @return float 
+     */
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * Set lng
+     *
+     * @param float $lng
+     */
+    public function setLng($lng)
+    {
+        $this->lng = $lng;
+    }
+
+    /**
+     * Get lng
+     *
+     * @return float 
+     */
+    public function getLng()
+    {
+        return $this->lng;
     }
 }
