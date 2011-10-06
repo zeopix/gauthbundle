@@ -16,17 +16,19 @@ $("#iga_oauthbundle_eventtype_location").keyup(function(){
 
 $(".choose").live('click',function(){
     var vr = $(this).parent().prev().html();
+    var lat = $(this).parent().prev().attr("lat");
+    var lng = $(this).parent().prev().attr("lng");
     $("#iga_oauthbundle_eventtype_location").attr("value",vr);
-    //$("#iga_oauthbundle_eventtype_location").attr("disabled","disabled");
+    $("#iga_oauthbundle_eventtype_lat").attr("value",lat);
+    $("#iga_oauthbundle_eventtype_lng").attr("value",lng);
+    $("#iga_oauthbundle_eventtype_location").attr("disabled","disabled");
     $("#info").fadeOut();
     $("#info").html("<a id='change' class='btn warning' href='#'>Cambiar</a>");
     $("#info").fadeIn();
 });
 
 $("#change").live("click",function(){
-    $("#iga_oauthbundle_eventtype_location").attr("enabled","enabled");
-    $("#iga_oauthbundle_eventtype_location").attr("disabled","false");
-    $("#iga_oauthbundle_eventtype_location").enable();
+    $("#iga_oauthbundle_eventtype_location").removeAttr("disabled");
     $("#info").html("Introduce una localización");
 })
 {% endblock %}
