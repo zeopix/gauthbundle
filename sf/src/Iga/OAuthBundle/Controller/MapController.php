@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Iga\OAuthBundle\Entity\Event;
+use Iga\OAuthBundle\Util\Slug;
 
 use Ano\Bundle\GoogleMapsBundle\Service\GeocodeAPIQuery;
 
@@ -35,6 +36,10 @@ class MapController extends Controller
             $request = $this->getRequest();
             
             $query = $request->query->get('query');
+            
+            $q = new Slug($query);
+            
+            $query = str_replace("-"," ",$q);
             
             $geocode = new GeocodeAPIQuery(array(
                 'address' => $query,
