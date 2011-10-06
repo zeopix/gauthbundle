@@ -1,5 +1,4 @@
 <?php
-
 namespace Iga\OAuthBundle\Util;
 
 

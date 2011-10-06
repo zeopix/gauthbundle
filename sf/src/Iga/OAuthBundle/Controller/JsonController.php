@@ -324,6 +324,32 @@ class JsonController extends Controller
              return new Response(json_encode(array('albums'=>$albums,'photos'=>false,'eid'=>$eid)));
              
     }
+    
+    
+    /**
+     * @Route("/find/{lat}/{lng}", name="json_find_latlng")
+     */
+    public function jsonFindLatLngAction($lat,$lng)
+    {
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        $radius = 0.5;
+        
+        //tm: lat minim tx: lat maxim  gm: lng minim gx: lng max
+        $elements = $em->createQuery('SELECT e.id, e.title, e.start, e.end, e.lat, e.lng, e.location FROM IgaOAuthBundle:Event e WHERE e.lat > :tm AND e.lat < :tx AND e.lng > :gm AND e.lng < :gx')
+                ->setParameter("tm",($lat-$radius))
+                ->setParameter("tx",($lat+$radius))
+                ->setParameter("gm",($lng-$radius))
+                ->setParameter("gx",($lng+$radius))
+                ->getResult();
+        
+        return new Response(json_encode($elements));
+        
+        
+        
+    }
+    
     /**
      * @Route("/picasa/{eid}/{id}", name="json_picasa_album")
      */
