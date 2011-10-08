@@ -1,37 +1,29 @@
 {% extends 'IgaOAuthBundle:Secured:index.html.twig' %}
 {% block main %}
+{% if user %}
 <a style="float:left;" href="{{ user.url }}"><img height="80px" src="{{ user.image }}?sz=80"></a>
 <h3 style="float:left;">Bienvenido, {{ user.displayName }}</h3>
 <div style="clear:both"></div>
-<h1>Event list</h1>
+{% endif %}
+<h1>Próximos eventos</h1>
 
-<table class="zebra_striped">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Título</th>
-            <th>Lugar</th>
-            <th>Empieza</th>
-            <th>Información</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
     {% for entity in entities %}
-        <tr>
-            <td><a href="{{ path('event_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.title }}</td>
-            <td>{{ entity.location }}</td>
-            <td>{% if entity.start %}{{ entity.start|date('Y-m-d H:i:s') }}{% endif%}</td>
-            <td>{% if entity.end %}{{ entity.info }}{% endif%}</td>
-            <td>
-                <a class="btn primary" href="{{ path('event_show', { 'id': entity.id }) }}">Más Información</a>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
 
+<h3>{{ entity.title }}</h3>
+<img src="http://maps.google.com/maps/api/staticmap?center={{ entity.location|escape }}&zoom=14&size=80x80&maptype=roadmap
+&markers=color:blue|label:A|{{ entity.lat }},{{ entity.lng }}&sensor=false" height="80px" width="80px" class="map">
+<div class="attrs">
+En <b>{{ entity.location }}</b>{% if entity.start %}, comienza {{ entity.start|date('Y-m-d H:i:s') }}{% endif%}.<br>
+<b>Información:</b><br>
+{% if entity.end %}{{ entity.info }}{% endif%}
+</div>
+                <a class="btn primary right" href="{{ path('event_show', { 'id': entity.id }) }}">Ver más</a>
+
+</div style="clear:both"></div>
+
+           
+    {% endfor %}
+    
 <ul>
     <li>
         <a href="{{ path('event_new') }}">

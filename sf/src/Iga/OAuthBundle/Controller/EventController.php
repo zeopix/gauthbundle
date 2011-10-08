@@ -44,11 +44,12 @@ class EventController extends Controller
             $me = $plus->people->get('me');
             $user = $this->checkUser($me);
         }catch(Exceptino $e){
-            return $this->redirect($this->generateUrl('GoogleToken'));
+            //return $this->redirect($this->generateUrl('GoogleToken'));
         }
         
         $em = $this->getDoctrine()->getEntityManager();
-        $entities = $em->getRepository('IgaOAuthBundle:Event')->findAll();
+        //$entities = $em->getRepository('IgaOAuthBundle:Event')->findAll();
+        $entities = $em->createQuery("SELECT e.id, e.start, e.end, e.location, e.lat, e.lng, e.title, e.info FROM IgaOAuthBundle:Event e ORDER BY e.start DESC")->getResult();
         //$client = $this->getClient();
         $id = 1;
         
@@ -106,7 +107,7 @@ class EventController extends Controller
         $at =  $session->get('access_token');
         if(!isset($at)){
             //do normal
-            //return $this->redirect($this->generateUrl('GoogleToken'));
+            return $this->redirect($this->generateUrl('GoogleToken'));
             
         }
         $entity = new Event();
@@ -157,6 +158,7 @@ class EventController extends Controller
             $entity->setCreatedAt(new \DateTime());
             $entity->setUpdatedAt(new \DateTime());
             $entity->setGoogleUser($user->getGoogleid());
+            //$entity->setGoogleUser(0);
             $em->persist($entity);
             $em->flush();
 
