@@ -19,16 +19,9 @@ En <b>{{ entity.location }}</b>{% if entity.start %}, comienza {{ entity.start|d
 </div>
                 <a class="btn primary right" href="{{ path('event_show', { 'id': entity.id }) }}">Ver más</a>
 
-</div style="clear:both"></div>
+<div style="clear:both"></div>
 
            
     {% endfor %}
-    
-<ul>
-    <li>
-        <a href="{{ path('event_new') }}">
-            Create a new entry
-        </a>
-    </li>
-</ul>
+
 {% endblock %}
